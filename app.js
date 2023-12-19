@@ -5,12 +5,15 @@ const app=express();
 const path = require('path')
 
 const errorcontroller=require('./controllers/error')
+const db=require('./util/database')
 
 
 const adminRoutes = require('./routes/admin')
 const shopRoutes=require('./routes/shop')
 const contactusRoutes =require('./routes/contact')
 const successRoutes=require('./routes/success')
+
+db.execute('SELECT * FROM products')
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname,'public')))
