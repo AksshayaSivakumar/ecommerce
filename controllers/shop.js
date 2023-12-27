@@ -2,10 +2,10 @@ const Product = require('../models/product');
 const Cart = require('../models/cart');
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll()
-  .then(([rows,fieldData])=>{
+  Product.findAll()
+  .then((products)=>{
     res.render('shop/product-list', {
-      prods: rows,
+      prods: products,
       pageTitle: 'All Products',
       path: '/products'
     })
@@ -16,22 +16,33 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
-  Product.findById(prodId) 
-  .then(([product])=>{
+  Product.findAll({where:{id:prodId}}) 
+  .then(products=>{
     res.render('shop/product-detail', {
-      product: product[0],
-      pageTitle: product.title,
+      product: products[0],
+      pageTitle: products.title,
       path: '/products'
     });
   })
   .catch(err=>console.log(err));
 };
+// Product.findById(prodId)
+// .then(products=>{
+//   res.render('shop/product-detail', {
+//     product: products,
+//     pageTitle: products.title,
+//     path: '/products'
+//   });
+// })
+// .catch(err=>console.log(err));
+// };
+
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll()
-  .then(([rows,fieldData])=>{
+  Product.findAll()
+  .then((products)=>{
     res.render('shop/index', {
-      prods: rows,
+      prods: products,
       pageTitle: 'Shop',
       path: '/'
     });
@@ -62,18 +73,18 @@ exports.getCart = (req, res, next) => {
 
 exports.deleteDetails=(req,res,next)=>{
   
-  const prodId = req.params.productId;
-  Product.deleteDetails(prodId)
-  .then(([product])=>{
-    res.render('shop/index', {
-      prods: product[0],
-      pageTitle: product.title,
-      path: '/delete'
+  // const prodId = req.params.productId;
+  // Product.deleteDetails(prodId)
+  // .then((product)=>{
+  //   res.render('shop/index', {
+  //     prods: product,
+  //     pageTitle: product.title,
+  //     path: '/delete'
       
-    });
-  })
-  .catch(err=>console.log(err));
-  res.redirect('/');
+  //   });
+  // })
+  // .catch(err=>console.log(err));
+  // res.redirect('/');
 };
 
 
