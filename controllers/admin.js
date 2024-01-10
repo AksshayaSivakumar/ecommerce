@@ -40,6 +40,7 @@ exports.getEditProduct = (req, res, next) => {
   .getProducts({where:{id:prodId}})
   //Product.findAll({where: {id:prodId}})
     .then(product => {
+      
       if (!product) {
         return res.redirect('/');
       }
