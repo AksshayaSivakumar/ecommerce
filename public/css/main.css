@@ -170,7 +170,11 @@ form {
 }
 
 .card__image {
-  width: 100%;
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height:auto;
 }
 
 .card__image img {
@@ -214,3 +218,17 @@ form {
     display: none;
   }
 }
+
+.grid{
+  display: block;
+  text-align: center;
+}
+.image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: auto;
+  
+}
+
