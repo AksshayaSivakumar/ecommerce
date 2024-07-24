@@ -1,10 +1,10 @@
 const Product = require('../models/product');
-//const Cart = require('../models/cart');
-//const CartItem=require('../models/cartitem');
+
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll()
+  Product.find()
   .then((products)=>{
+    console.log(products)
     res.render('shop/product-list', {
       prods: products,
       pageTitle: 'All Products',
@@ -27,20 +27,11 @@ exports.getProduct = (req, res, next) => {
   })
   .catch(err=>console.log(err));
 };
-// Product.findById(prodId)
-// .then(products=>{
-//   res.render('shop/product-detail', {
-//     product: products,
-//     pageTitle: products.title,
-//     path: '/products'
-//   });
-// })
-// .catch(err=>console.log(err));
-// };
+
 
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll()
+  Product.find()
   .then((products)=>{
     res.render('shop/index', {
       prods: products,
